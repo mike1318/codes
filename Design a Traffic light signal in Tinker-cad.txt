@@ -1,0 +1,30 @@
+#traffic light
+
+// C++ code
+//
+int redLED = 13;
+int yellowLED = 11;
+int greenLED = 12;
+void setup()
+{
+   pinMode(redLED, OUTPUT);
+  pinMode(yellowLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(redLED, HIGH);
+  delay(5000); // Red light for 5 seconds
+  digitalWrite(redLED, LOW);
+  
+  // Green light
+  digitalWrite(greenLED, HIGH);
+  delay(3000); // Green light for 5 seconds
+  digitalWrite(greenLED, LOW);
+
+  // Yellow light
+  digitalWrite(yellowLED, HIGH);
+  delay(2000); // Yellow light for 2 seconds
+  digitalWrite(yellowLED, LOW);
+}

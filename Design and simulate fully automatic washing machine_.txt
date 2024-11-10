@@ -1,0 +1,35 @@
+#washing machine code
+// C++ code
+//
+const int startButtonPin = 2;  // Start button input pin
+const int motorPin = 9;        // Motor control pin (connected to transistor)
+const int cycleLedPin = 8;     // Cycle Running LED pin
+const int powerLedPin = 13;    // Power indicator LED (onboard LED)
+
+void setup()
+{
+    pinMode(startButtonPin, INPUT);      // Start button as input
+  pinMode(motorPin, OUTPUT);           // Motor pin as output
+  pinMode(cycleLedPin, OUTPUT);        // Cycle LED as output
+  pinMode(powerLedPin, OUTPUT);        // Power LED as output
+  
+  digitalWrite(powerLedPin, HIGH);     // Turn on Power LED
+  digitalWrite(motorPin, LOW);         // Motor initially off
+  digitalWrite(cycleLedPin, LOW);      // Cycle LED initially off
+}
+
+void loop()
+{
+   if (digitalRead(startButtonPin) == HIGH) {
+    digitalWrite(cycleLedPin, HIGH);   // Turn on Cycle Running LED
+    digitalWrite(motorPin, HIGH);      // Start motor
+    
+    delay(5000);                       // Simulate a 5-second washing cycle
+    
+    digitalWrite(motorPin, LOW);       // Stop motor
+    digitalWrite(cycleLedPin, LOW);    // Turn off Cycle Running LED
+    
+    delay(2000);                       // Delay before allowing a new cycle
+  }
+}
+

@@ -1,0 +1,33 @@
+
+//using IRremote.hpp 4.xx versions 
+#include <IRremote.hpp>
+
+
+const int recv_pin = 2; // IR receiver pin
+const int relay_pin = 3; // Relay pin
+
+IRrecv irrecv(recv_pin);
+
+
+void setup() {
+  Serial.begin(9600);
+  IrReceiver.begin(recv_pin ,ENABLE_LED_FEEDBACK);// Start the receiver
+  pinMode(relay_pin, OUTPUT);
+  digitalWrite(relay_pin, LOW); // Make sure relay is off initially
+}
+
+void loop() {
+  if (IrReceiver.decode()) {
+    Serial.println(IrReceiver.decodedIRData.decodedRawData , HEX); // Print the received value
+
+    // Replace these values with those from your remote
+    if (IrReceiver.decodedIRData.decodedRawData == 0x5DA2FF00 ) { // Change this value to the code for your button
+      digitalWrite(relay_pin, HIGH); // Turn on the relay (LED)
+    } else if (IrReceiver.decodedIRData.decodedRawData == 0xDD22FF00) { // Change this value to the code for your button
+      digitalWrite(relay_pin, LOW); // Turn off the relay (LED)
+    }
+
+    IrReceiver.resume(); // Receive the next value
+  }
+}
+
